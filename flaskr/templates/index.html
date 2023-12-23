@@ -6,6 +6,12 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>test</h1>
+    <h1>Book Store</h1>
+    <h2>New title index</h2>
+    {% for book in books %}
+    <p>title: {{ book.title }}</p>
+    <p>price: {{ book.price }}</p>
+    <p>day: {{ book.arrival_day }}</p>
+    {% endfor %}
 </body>
 </html>
