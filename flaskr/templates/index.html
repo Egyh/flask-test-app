@@ -13,5 +13,7 @@
     <p>price: {{ book.price }}</p>
     <p>day: {{ book.arrival_day }}</p>
     {% endfor %}
+
+    <a href="{{ url_for('form') }}">edit</a>
 </body>
 </html>

@@ -1,20 +1,24 @@
 from flaskr import app  # app インスタンスをimport
 from flask import render_template
+import sqlite3
+DATABASE = 'database.db'
 
 @app.route('/')
 def index():
-    books = [
-        {'title': 'Math',
-        'price': 1000,
-        'arrival_day': '2023/12/23'},
-        
-        {'title': 'English',
-        'price': 1500,
-        'arrival_day': '2023/12/27'},
-    ]
+    con = sqlite3.connect(DATABASE)
+    db_books = con.execute('SELECT * FROM books').fetchall()
+    
+    books = []
+    for row in db_books:
+        books.append({'title': row[0], 'price': row[1], 'arrival_day': row[2]})
     
     return render_template(
         'index.html',
         books=books
         )
     
+@app.route('/form')    
+def form():
+    return render_template(
+        'form.html'
+        )
