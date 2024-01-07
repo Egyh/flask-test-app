@@ -7,6 +7,25 @@
 </head>
 <body>
     <h1>Book Store</h1>
-    <h2>this is the form page</h2>
+    <form method="post" action="{{ url_for('register') }}">
+        <table border="1">
+            <tr>
+
+                <th>arrival_day</th>
+                <th>title</th>
+                <th>price</th>
+
+            </tr>
+
+            <tr>
+
+                <td><input type="text" name="arrival_day"></td>
+                <td><input type="text" name="title"></td>
+                <td><input type="text" name="price"></td>
+
+            </tr>
+        </table>
+        <input type="submit" value="OK">
+    </form>
 </body>
 </html>

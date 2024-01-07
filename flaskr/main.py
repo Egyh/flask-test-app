@@ -1,5 +1,5 @@
 from flaskr import app  # app インスタンスをimport
-from flask import render_template
+from flask import render_template, request, redirect, url_for
 import sqlite3
 DATABASE = 'database.db'
 
@@ -7,6 +7,7 @@ DATABASE = 'database.db'
 def index():
     con = sqlite3.connect(DATABASE)
     db_books = con.execute('SELECT * FROM books').fetchall()
+    con.close()
     
     books = []
     for row in db_books:
@@ -22,3 +23,17 @@ def form():
     return render_template(
         'form.html'
         )
+ 
+@app.route('/register', methods=['post'])   
+def register():
+    title = request.form['title']
+    price = request.form['price']
+    arrival_day = request.form['arrival_day']
+    
+    con = sqlite3.connect(DATABASE)
+    con.execute('INSERT INTO books VALUES(?, ?, ?)',
+                [title, price, arrival_day])
+    con.commit()
+    con.close()
+    
+    return redirect(url_for('index'))
